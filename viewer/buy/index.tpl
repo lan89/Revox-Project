@@ -56,38 +56,42 @@ if (isset($_POST['Home'])) {
             $countItem = security::clean($_POST['countItem']);
             $player = new Player();
 			$data = $Database->SelectWhere("store,item_store", " id = id_store AND enable = 1 GROUP BY  id");
-            for ($i = 0; $i < count($data); $i++) {
-                if (md5($data[$i]['id_store'] . date('Y-m-d')) == $iditem) {
-					$total = $countItem * $data[$i]['price'];
-					if ($total <= $point) {
-						$newPoint = $point - ($data[$i]['price'] * $countItem );
-						$updatePoint = $player->updatePoint($_SESSION['dataPlay'][0]['account_id'], $newPoint);
-						if ($data[$i]['type'] == "offerRand") {
-							$rand = preg_split('/,/', $data[$i]['count']);
-							if(($data[$i]['price'] * $countItem) <= $point){
-								for($e = 0; $e < $countItem ; $e++){
-									$count = $rand[array_rand($rand)];
-									$addItem = $player->addItem($_SESSION['dataPlay'][0]['account_id'], $data[$i]['code'], $count);
+			if($countItem >= 1 and $countItem <= 9){
+				for ($i = 0; $i < count($data); $i++) {
+					if (md5($data[$i]['id_store'] . date('Y-m-d')) == $iditem) {
+						$total = $countItem * $data[$i]['price'];
+						if ($total <= $point) {
+							$newPoint = $point - ($data[$i]['price'] * $countItem );
+							$updatePoint = $player->updatePoint($_SESSION['dataPlay'][0]['account_id'], $newPoint);
+							if ($data[$i]['type'] == "offerRand") {
+								$rand = preg_split('/,/', $data[$i]['count']);
+								if(($data[$i]['price'] * $countItem) <= $point){
+									for($e = 0; $e < $countItem ; $e++){
+										$count = $rand[array_rand($rand)];
+										$addItem = $player->addItem($_SESSION['dataPlay'][0]['account_id'], $data[$i]['code'], $count);
+									}
+								} else {
+									$addItem = 0;
 								}
 							} else {
-								$addItem = 0;
+								if(($data[$i]['price'] * $countItem) <= $point){
+									$rand = preg_split('/,/', $data[$i]['count']);
+									for($e = 0; $e < $countItem ; $e++){
+										$count = $rand[array_rand($rand)];
+										$addItem = $player->addItem($_SESSION['dataPlay'][0]['account_id'], $data[$i]['code'], $count);
+									}
+								} else {
+									$addItem = 0;
+								}
 							}
 						} else {
-							if(($data[$i]['price'] * $countItem) <= $point){
-								$rand = preg_split('/,/', $data[$i]['count']);
-								for($e = 0; $e < $countItem ; $e++){
-									$count = $rand[array_rand($rand)];
-									$addItem = $player->addItem($_SESSION['dataPlay'][0]['account_id'], $data[$i]['code'], $count);
-								}
-							} else {
-								$addItem = 0;
-							}
+							$addItem = 0;
 						}
-					} else {
-						$addItem = 0;
 					}
-                }
-            }
+				}
+			} else {
+				$addItem = 0;
+			}
             if ($addItem == 1) {
                 ?>
 
