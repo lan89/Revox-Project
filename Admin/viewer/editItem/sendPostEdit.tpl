@@ -63,7 +63,7 @@ if($type == "item"){
 	}
 	
 	if (!empty($typeDb)) {
-		$fields[count($fields)] = " `typeDb` = '$typeDb' ";
+		$fields[count($fields)] = " `type` = '$typeDb' ";
 	}
 	$fcount = count($fields);
 	for ($i = 0; $i < $fcount; $i++) {
