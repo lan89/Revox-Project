@@ -6,7 +6,10 @@ Made by ham999dy
 ## Introduction
 
 ![Language](https://img.shields.io/badge/Language-PHP-blue.svg)
-![Language](https://img.shields.io/badge/Database-SQLServer-red.svg) ![Language](https://img.shields.io/badge/Database-MySQL-orange.svg)
+
+![Language](https://img.shields.io/badge/Database-SQLServer-red.svg) 
+![Language](https://img.shields.io/badge/Database-MySQL-orange.svg)
+
 Revox Project is a shop written by our team with PHP,SQLSRV,MySQL Also we used free bootstrap templates from google.
 
 The shop come with Admin Portal (you can delete it) also it work from inside the game only , You need to install MySQL server (I will not go into details)
