@@ -7,7 +7,7 @@ if(!defined("Vewi_TPL_File")){
 	die("File not Found!");
 }
 $refData = parse_url($_SERVER['HTTP_REFERER']);
-if ($refData['host'] == 'billing.rappelz.ae' AND $refData['scheme'] == 'https'){
+if ($refData['host'] == REF_HOST AND $refData['scheme'] == REF_SCHEME){
 	
 	$name = security::clean(@$_POST['name']);
 	
