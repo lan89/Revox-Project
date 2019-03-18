@@ -31,3 +31,6 @@ define("HASH_PASSWORD", "RevoTeam2018");
 define("SERVER_NAME", "RevoTeam");
 define("DEV_MODE", 0);
 
+//Site Host and scheme
+define("REF_HOST", '127.0.0.1');
+define("REF_SCHEME", 'http');
